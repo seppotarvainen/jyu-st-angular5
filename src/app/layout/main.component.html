@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-3">
+    <project-list [projects]="projects"
+                  (onSelectProject)="selectProject($event)"></project-list>
+
+    <button class="btn btn-default" (click)="clickAddProject()">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      <span>Add project</span>
+    </button>
+  </div>
+
+  <div class="col-md-9">
+    <project-view *ngIf="!isEditMode"
+                  (onDeleteProject)="deleteProject($event)"
+                  (onUpdateProject)="editProject($event)"
+                  [project]="selectedProject"></project-view>
+    <project-form *ngIf="isEditMode"
+                  (onChangeEditStatus)="isEditMode = $event"
+                  (submitForm)="addProject($event)"></project-form>
+  </div>
+</div>
