@@ -1,6 +1,8 @@
 <div *ngIf="project; else no_content">
   <div class="row">
-    <h1>{{project?.title}}</h1>
+    <h1>{{project?.title}}
+      <span *ngIf="project.done" class="glyphicon glyphicon-ok small"></span>
+    </h1>
 
     <p class="lead">
       {{ project?.description }}
@@ -10,10 +12,15 @@
   </div>
   <div class="row">
     <hr>
-    <div>
+    <div class="mb-1">
       <button type="button" class="btn btn-danger" (click)="deleteProject()">
         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete project
       </button>
+    </div>
+    <div class="mb-1">
+      <input id="isDone" type="checkbox" class="pt-6" [checked]="project.done"
+             (change)="toggleProjectDone($event.target.checked)"/>
+      <label for="isDone">Mark project as done</label>
     </div>
   </div>
 </div>

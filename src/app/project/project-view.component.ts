@@ -14,7 +14,7 @@ export class ProjectViewComponent {
   @Output() onUpdateProject: EventEmitter<Project> = new EventEmitter();
   @Output() onDeleteProject: EventEmitter<Project> = new EventEmitter();
 
-  updateTime(event) {
+  updateTime(event: number) {
     const updatedProject = Object.assign(this.project);
     updatedProject.timeInSeconds = event;
     this.updateProject(updatedProject);
@@ -22,6 +22,11 @@ export class ProjectViewComponent {
 
   updateProject(updatedProject: Project) {
     this.onUpdateProject.emit(updatedProject);
+  }
+
+  toggleProjectDone(event: boolean) {
+    this.project.done = event;
+    this.updateProject(this.project);
   }
 
   deleteProject() {

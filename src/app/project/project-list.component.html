@@ -7,6 +7,7 @@
     <button class="list-group-item" [ngClass]="{'list-group-item-info': project == selectedProject}"
             (click)="onSelect(project)">
       <span>{{project.title}}</span>
+      <span *ngIf="project.done" class="glyphicon glyphicon-ok small"></span>
     </button>
   </div>
 </div>
