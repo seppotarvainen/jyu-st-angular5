@@ -3,12 +3,16 @@ import {Injectable} from "@angular/core";
 import "rxjs/add/operator/toPromise";
 
 import Project from "./project";
+import {BehaviorSubject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class ProjectService {
 
   private projectsUrl: string = "http://localhost:8080/projects";
+
+  private lock = new BehaviorSubject<boolean>(false);
+  lock$ = this.lock.asObservable();
 
   constructor(private http: HttpClient) {
   }
@@ -36,6 +40,10 @@ export class ProjectService {
     return this.http.put(url, project)
       .toPromise()
       .then(response => response as Project);
+  }
+
+  setLock(lockState: boolean) {
+    this.lock.next(lockState);
   }
 
 }

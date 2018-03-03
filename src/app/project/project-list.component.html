@@ -4,7 +4,8 @@
 
 <div>
   <div *ngFor="let project of projects">
-    <button class="list-group-item" [ngClass]="{'list-group-item-info': project === selectedProject}"
+    <button class="list-group-item" [disabled]="isLocked"
+            [ngClass]="{'list-group-item-info': project === selectedProject, 'disabled': isLocked}"
             (click)="onSelect(project)">
       <span>{{project.title}}</span>
       <span *ngIf="project.done" class="glyphicon glyphicon-ok small"></span>

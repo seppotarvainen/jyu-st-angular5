@@ -4,7 +4,7 @@
                   [selectedProject]="selectedProject"
                   (onSelectProject)="selectProject($event)"></project-list>
 
-    <button class="btn btn-default" (click)="clickAddProject()">
+    <button [disabled]="isLocked" class="btn btn-default" (click)="clickAddProject()">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
       <span>Add project</span>
     </button>
@@ -18,7 +18,7 @@
                   [project]="selectedProject"></project-view>
     <project-form *ngIf="isEditMode"
                   [project]="selectedProject"
-                  (onChangeEditStatus)="isEditMode = $event"
+                  (onCancelForm)="cancelForm($event)"
                   (submitForm)="submitForm($event)"></project-form>
   </div>
 </div>

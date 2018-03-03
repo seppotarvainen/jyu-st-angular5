@@ -11,7 +11,7 @@ import Project from "./project";
 })
 export class ProjectFormComponent implements OnChanges {
   @Input() project: Project;
-  @Output() onChangeEditStatus: EventEmitter<boolean> = new EventEmitter();
+  @Output() onCancelForm: EventEmitter<Project> = new EventEmitter();
   @Output() submitForm: EventEmitter<Project> = new EventEmitter();
   projectCopy: Project = new Project();
 
@@ -23,7 +23,7 @@ export class ProjectFormComponent implements OnChanges {
   }
 
   onClickCancel(): void {
-    this.onChangeEditStatus.emit(false);
+    this.onCancelForm.emit(this.project);
   }
 
   onClickSubmit(form: Project): void {

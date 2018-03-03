@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import Project from "./project";
+import {ProjectService} from "./project.service";
 /**
  * Created by Seppo on 21/02/2018.
  */
@@ -14,6 +15,13 @@ export class ProjectViewComponent {
   @Output() onUpdateProject: EventEmitter<Project> = new EventEmitter();
   @Output() onDeleteProject: EventEmitter<Project> = new EventEmitter();
   @Output() onClickEditProject: EventEmitter<Project> = new EventEmitter();
+  isLocked = false;
+
+  constructor(private projectService: ProjectService) {
+    this.projectService.lock$.subscribe(lock => {
+      if (lock !== null) this.isLocked = lock;
+    });
+  }
 
   updateTime(event: number) {
     const updatedProject = Object.assign(this.project);

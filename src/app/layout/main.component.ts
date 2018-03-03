@@ -11,8 +11,12 @@ export class MainComponent implements OnInit {
   projects: Project[] = [];
   selectedProject: Project = null;
   isEditMode: boolean = false;
+  isLocked = false;
 
   constructor(private projectService: ProjectService) {
+    this.projectService.lock$.subscribe(lock => {
+      if (lock !== null) this.isLocked = lock;
+    });
   }
 
   ngOnInit(): void {
@@ -31,6 +35,10 @@ export class MainComponent implements OnInit {
 
   clickEditProject(project: Project) {
     this.setProject(project, true);
+  }
+
+  cancelForm(project: Project) {
+    project.id ? this.setProject(project, false) : this.setProject(null, false);
   }
 
   submitForm(project: Project) {
