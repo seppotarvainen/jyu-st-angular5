@@ -28,6 +28,7 @@ export class ProjectFormComponent implements OnChanges {
 
   onClickSubmit(form: Project): void {
     form.id = this.projectCopy.id ? this.projectCopy.id : null;
+    form.timeInSeconds = this.projectCopy.timeInSeconds;
     this.submitForm.emit(form);
   }
 
@@ -40,7 +41,7 @@ export class ProjectFormComponent implements OnChanges {
 
   private setProjectCopyToOriginal(): void {
     if (this.project) {
-      this.projectCopy = Object.assign(this.project) as Project;
+      this.projectCopy = JSON.parse(JSON.stringify(this.project)) as Project;
     } else {
       this.projectCopy = new Project();
     }

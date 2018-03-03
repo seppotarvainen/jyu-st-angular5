@@ -13,6 +13,7 @@ export class ProjectViewComponent {
   @Input() project: Project;
   @Output() onUpdateProject: EventEmitter<Project> = new EventEmitter();
   @Output() onDeleteProject: EventEmitter<Project> = new EventEmitter();
+  @Output() onClickEditProject: EventEmitter<Project> = new EventEmitter();
 
   updateTime(event: number) {
     const updatedProject = Object.assign(this.project);
@@ -31,5 +32,9 @@ export class ProjectViewComponent {
 
   deleteProject() {
     this.onDeleteProject.emit(this.project);
+  }
+
+  clickEditProject() {
+    this.onClickEditProject.emit(this.project);
   }
 }

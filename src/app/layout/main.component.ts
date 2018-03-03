@@ -26,29 +26,43 @@ export class MainComponent implements OnInit {
   }
 
   clickAddProject() {
-    this.isEditMode = true;
+    this.setProject(new Project(), true);
   }
 
-  addProject(project: Project) {
-    this.projectService.addProject(project)
-      .then(response => {
-        this.projects.push(response);
-        this.isEditMode = false;
-        this.selectedProject = response;
-      });
+  clickEditProject(project: Project) {
+    this.setProject(project, true);
+  }
+
+  submitForm(project: Project) {
+    if (!project.id) {
+      this.projectService.addProject(project)
+        .then(response => {
+          this.projects.push(response);
+          this.setProject(response, false);
+        });
+    } else {
+      this.editProject(project)
+        .then(r => {
+          this.setProject(project, false);
+        });
+    }
+  }
+
+  private setProject(project, editMode) {
+    this.selectedProject = project;
+    this.isEditMode = editMode;
   }
 
   editProject(project: Project) {
-    this.projectService.updateProject(project)
-      .then(response => this.projects.map(p => p.id === project.id ? project : p));
+    return this.projectService.updateProject(project)
+      .then(response => this.projects = this.projects.map(p => p.id === project.id ? project : p));
   }
 
   deleteProject(project: Project) {
     this.projectService.deleteProject(project)
       .then(() => {
         this.projects = this.projects.filter(p => p.id !== project.id);
-        this.isEditMode = false;
-        this.selectedProject = null;
+        this.setProject(null, false);
       });
   }
 }

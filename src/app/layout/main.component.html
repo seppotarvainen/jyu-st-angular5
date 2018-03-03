@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-md-3">
     <project-list [projects]="projects"
+                  [selectedProject]="selectedProject"
                   (onSelectProject)="selectProject($event)"></project-list>
 
     <button class="btn btn-default" (click)="clickAddProject()">
@@ -11,11 +12,13 @@
 
   <div class="col-md-9">
     <project-view *ngIf="!isEditMode"
+                  (onClickEditProject)="clickEditProject($event)"
                   (onDeleteProject)="deleteProject($event)"
                   (onUpdateProject)="editProject($event)"
                   [project]="selectedProject"></project-view>
     <project-form *ngIf="isEditMode"
+                  [project]="selectedProject"
                   (onChangeEditStatus)="isEditMode = $event"
-                  (submitForm)="addProject($event)"></project-form>
+                  (submitForm)="submitForm($event)"></project-form>
   </div>
 </div>
