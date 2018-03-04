@@ -27,6 +27,10 @@
       <label for="isDone">Mark project as done</label>
     </div>
   </div>
+
+  <div class="row">
+    <checklist [checklist]="project.checklist" (onAddItem)="addChecklistItem($event)"></checklist>
+  </div>
 </div>
 
 <!-- Shown if no project is selected -->

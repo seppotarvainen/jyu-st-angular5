@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import Project from "./project";
 import {ProjectService} from "./project.service";
+import {ChecklistItem} from "../checklist/checklist-item";
 /**
  * Created by Seppo on 21/02/2018.
  */
@@ -44,5 +45,12 @@ export class ProjectViewComponent {
 
   clickEditProject() {
     this.onClickEditProject.emit(this.project);
+  }
+
+  addChecklistItem(item: ChecklistItem) {
+    this.projectService.addChecklistItem(this.project.id, item)
+      .then(newItem => {
+        this.project.checklist.push(newItem);
+      });
   }
 }

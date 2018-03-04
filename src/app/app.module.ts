@@ -11,6 +11,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {ProjectFormComponent} from "./project/project-form.component";
 import {FormsModule} from "@angular/forms";
 import {TimerComponent} from "./timer/timer.component";
+import {ChecklistComponent} from "./checklist/checklist.component";
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {TimerComponent} from "./timer/timer.component";
     ProjectListComponent,
     ProjectViewComponent,
     ProjectFormComponent,
-    TimerComponent
+    TimerComponent,
+    ChecklistComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import "rxjs/add/operator/toPromise";
 import Project from "./project";
 import {BehaviorSubject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+import {ChecklistItem} from "../checklist/checklist-item";
 
 @Injectable()
 export class ProjectService {
@@ -44,6 +45,13 @@ export class ProjectService {
 
   setLock(lockState: boolean) {
     this.lock.next(lockState);
+  }
+
+  addChecklistItem(projectId: number, checklistItem: ChecklistItem): Promise<ChecklistItem> {
+    const url = `${this.projectsUrl}/${projectId}/checklist-items`;
+    return this.http.post(url, checklistItem)
+      .toPromise()
+      .then(response => response as ChecklistItem);
   }
 
 }
