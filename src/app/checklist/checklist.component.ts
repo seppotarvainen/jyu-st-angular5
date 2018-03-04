@@ -12,6 +12,7 @@ export class ChecklistComponent {
   @Input() checklist: ChecklistItem[];
   @Output() onAddItem: EventEmitter<ChecklistItem> = new EventEmitter();
   @Output() updateItemDone: EventEmitter<ChecklistItem> = new EventEmitter();
+  @Output() onRemoveDoneItems: EventEmitter<void> = new EventEmitter();
 
   isEditMode = false;
   newContent = "";
@@ -34,6 +35,10 @@ export class ChecklistComponent {
   setItemDone(item: ChecklistItem, value: boolean) {
     item.done = value;
     this.updateItemDone.emit(item);
+  }
+
+  removeDoneItems() {
+    this.onRemoveDoneItems.emit();
   }
 
 }

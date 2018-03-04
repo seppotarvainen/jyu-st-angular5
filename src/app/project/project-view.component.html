@@ -29,7 +29,9 @@
   </div>
 
   <div class="row">
-    <checklist (updateItemDone)="updateChecklistItem($event)" [checklist]="project.checklist"
+    <checklist (updateItemDone)="updateChecklistItem($event)"
+               (onRemoveDoneItems)="removeDoneItems()"
+               [checklist]="project.checklist"
                (onAddItem)="addChecklistItem($event)"></checklist>
   </div>
 </div>

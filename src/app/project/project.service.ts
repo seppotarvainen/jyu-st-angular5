@@ -61,4 +61,10 @@ export class ProjectService {
       .then(response => response as ChecklistItem);
   }
 
+  removeDoneChecklistItems(projectId: number): Promise<any> {
+    const url = `${this.projectsUrl}/${projectId}/checklist-items`;
+    return this.http.delete(url)
+      .toPromise();
+  }
+
 }

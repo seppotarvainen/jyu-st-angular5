@@ -59,6 +59,12 @@ export class ProjectViewComponent {
       .then(newItem => {
         this.project.checklist = this.project.checklist.map(checkItem => checkItem.id === newItem.id ? newItem : checkItem);
       });
+  }
 
+  removeDoneItems() {
+    this.projectService.removeDoneChecklistItems(this.project.id)
+      .then(() => {
+        this.project.checklist = this.project.checklist.filter(item => !item.done);
+      });
   }
 }
