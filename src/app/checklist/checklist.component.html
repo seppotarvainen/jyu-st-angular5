@@ -1,9 +1,11 @@
 <h3>Checklist</h3>
 <!-- checklist view -->
 <div *ngIf="!isEditMode">
-  <ul>
+  <ul class="checklist">
     <li *ngFor="let item of checklist">
-      {{item.content}}
+      <input id="item-{{item.id}}" type="checkbox" [checked]="item.done"
+             (change)="setItemDone(item, $event.target.checked)"/>
+      <label for="item-{{item.id}}" [ngClass]="{'done': item.done}">{{item.content}}</label>
     </li>
   </ul>
   <button class="btn btn-default" (click)="clickAddItem()">Add item</button>

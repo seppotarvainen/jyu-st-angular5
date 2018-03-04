@@ -53,4 +53,12 @@ export class ProjectViewComponent {
         this.project.checklist.push(newItem);
       });
   }
+
+  updateChecklistItem(item: ChecklistItem) {
+    this.projectService.updateChecklistItem(this.project.id, item)
+      .then(newItem => {
+        this.project.checklist = this.project.checklist.map(checkItem => checkItem.id === newItem.id ? newItem : checkItem);
+      });
+
+  }
 }

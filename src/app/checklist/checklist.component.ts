@@ -11,6 +11,7 @@ import {ChecklistItem} from "./checklist-item";
 export class ChecklistComponent {
   @Input() checklist: ChecklistItem[];
   @Output() onAddItem: EventEmitter<ChecklistItem> = new EventEmitter();
+  @Output() updateItemDone: EventEmitter<ChecklistItem> = new EventEmitter();
 
   isEditMode = false;
   newContent = "";
@@ -28,6 +29,11 @@ export class ChecklistComponent {
   cancelForm() {
     this.newContent = "";
     this.isEditMode = false;
+  }
+
+  setItemDone(item: ChecklistItem, value: boolean) {
+    item.done = value;
+    this.updateItemDone.emit(item);
   }
 
 }

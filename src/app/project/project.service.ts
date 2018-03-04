@@ -54,4 +54,11 @@ export class ProjectService {
       .then(response => response as ChecklistItem);
   }
 
+  updateChecklistItem(projectId: number, checklistItem: ChecklistItem): Promise<ChecklistItem> {
+    const url = `${this.projectsUrl}/${projectId}/checklist-items/${checklistItem.id}`;
+    return this.http.put(url, checklistItem)
+      .toPromise()
+      .then(response => response as ChecklistItem);
+  }
+
 }
